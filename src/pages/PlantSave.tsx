@@ -73,63 +73,68 @@ export function PlantSave() {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.plantInfo}>
-                <SvgFromUri
-                    uri={plant.photo}
-                    height={150}
-                    width={150}
-                />
-                <Text style={styles.plantName}>
-                    {plant.name}
-                </Text>
-                <Text style={styles.plantAbout}>
-                    {plant.about}
-                </Text>
-            </View>
-            <View style={styles.controller}>
-                <View style={styles.tipContainer}>
-                    <Image
-                        style={styles.tipImage}
-                        source={waterDrop}
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.container}
+        >
+            <View style={styles.container}>
+                <View style={styles.plantInfo}>
+                    <SvgFromUri
+                        uri={plant.photo}
+                        height={150}
+                        width={150}
                     />
-                    <Text style={styles.tipText}>
-                        {plant.water_tips}
+                    <Text style={styles.plantName}>
+                        {plant.name}
+                    </Text>
+                    <Text style={styles.plantAbout}>
+                        {plant.about}
                     </Text>
                 </View>
+                <View style={styles.controller}>
+                    <View style={styles.tipContainer}>
+                        <Image
+                            style={styles.tipImage}
+                            source={waterDrop}
+                        />
+                        <Text style={styles.tipText}>
+                            {plant.water_tips}
+                        </Text>
+                    </View>
 
-                <Text style={styles.alertLabel}>
-                    Escolha o melhor horário para ser lembrado
-                </Text>
+                    <Text style={styles.alertLabel}>
+                        Escolha o melhor horário para ser lembrado
+                    </Text>
 
-                {showDatePicker && (
-                    <DateTimePicker
-                        value={selectedDateTime}
-                        mode='time'
-                        display='spinner'
-                        onChange={handleChangeTime}
-                    />
-                )
-                }
-                {
-                    Platform.OS === 'android' && (
-
-                        <TouchableOpacity
-                            style={styles.dataTimePickerButton}
-                            onPress={handleOpenDateTimePickerForAndroid}
-                        >
-                            <Text style={styles.dataTimePickerText}>
-                                {`Mudar ${format(selectedDateTime, 'HH:mm')}`}
-                            </Text>
-                        </TouchableOpacity>
+                    {showDatePicker && (
+                        <DateTimePicker
+                            value={selectedDateTime}
+                            mode='time'
+                            display='spinner'
+                            onChange={handleChangeTime}
+                        />
                     )
-                }
-                <Button
-                    title='Cadastrar planta'
-                    onPress={handleSave}
-                />
+                    }
+                    {
+                        Platform.OS === 'android' && (
+
+                            <TouchableOpacity
+                                style={styles.dataTimePickerButton}
+                                onPress={handleOpenDateTimePickerForAndroid}
+                            >
+                                <Text style={styles.dataTimePickerText}>
+                                    {`Mudar ${format(selectedDateTime, 'HH:mm')}`}
+                                </Text>
+                            </TouchableOpacity>
+                        )
+                    }
+                    <Button
+                        title='Cadastrar planta'
+                        onPress={handleSave}
+                    />
+                </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -164,7 +169,8 @@ const styles = StyleSheet.create({
         fontFamily: fonts.text,
         color: colors.heading,
         fontSize: 17,
-        marginTop: 10,
+        // marginTop: 10,
+        paddingBottom: 50
     },
     tipContainer: {
         flexDirection: 'row',
@@ -174,7 +180,7 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 20,
         position: 'relative',
-        bottom: 60
+        bottom: 50
     },
     tipImage: {
         width: 56,
@@ -193,7 +199,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.complement,
         color: colors.heading,
         fontSize: 12,
-        marginBottom: 5
+        // marginBottom: 5
     },
     dataTimePickerButton: {
         width: '100%',
